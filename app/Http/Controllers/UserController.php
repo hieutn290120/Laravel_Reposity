@@ -1,0 +1,26 @@
+<?php
+
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+use App\Models\User;
+use App\Http\Requets\Register;
+
+class UserController extends Controller
+{
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    // index
+    public function index()
+    {
+        return view('page.account.register');
+    }
+
+    public function create(Register $request)
+    {
+        # code...
+    }
+}
