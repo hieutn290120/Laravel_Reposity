@@ -7,7 +7,8 @@
                     <div class="card">
                         <div class="card-header">Register</div>
                         <div class="card-body">
-                            <form name="form-register" onsubmit=" return validform()" id="form-register" action="success.php" method="">
+                            <form name="form-register" id="form-register" action="#" method="POST">
+                                @csrf
                                 <div class="form-group row">
                                     <label for="full_name" class="col-md-4 col-form-label text-md-right">Tên đầy đủ</label>
                                     <div class="col-md-6">
@@ -53,10 +54,10 @@
                                 <div class="form-group row">
                                     <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Giới Tính</label>
                                     <div class="col-md-6">
-                                       <select name="gender" id="gender">
+                                       <select class="form-control" name="gender" id="gender">
                                            <option value="0">Nam</option>
-                                           <option value="0">Nữ</option>
-                                           <option value="0">Khác</option>
+                                           <option value="1">Nữ</option>
+                                           <option value="2">Khác</option>
                                        </select>
                                     </div>
                                 </div>
@@ -134,6 +135,14 @@
                 }
             }
         );
+
+        $('#form-register').submit(function(){
+            var data_form_dangki = $('#form-register').serializeArray();
+            console.log(data_form_dangki);
+        })
+        
+
+
     })
        
 </script>
