@@ -4,8 +4,8 @@
 <section>
     <!-- container Start-->
     <div class="container" style="padding:0px 20px;">
-    <a href="{{url('/login')}}" role="button" class="btn btn-success btn-xs">Đăng Nhập</a>
-    <a href="{{url('/register')}}" role="button" class="btn btn-success btn-xs">Đăng Kí</a>
+    <a href="{{url('/dangnhap')}}" role="button" class="btn btn-success btn-xs">Đăng Nhập</a>
+    <a href="{{url('/dangki')}}" role="button" class="btn btn-success btn-xs">Đăng Kí</a>
     </div>
 </section>
 @endsection

@@ -4,10 +4,10 @@
 <div class="row justify-content-center">
     <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Register</div>
+                <div class="card-header">Đăng Nhập</div>
                 <div class="card-body">
                     
-                    <form name="form-register" id="form-register" action="#" method="POST">
+                    <form name="form-login" id="form-login" action="#" method="POST">
                         @csrf
 
                         <div class="form-group row">
@@ -24,9 +24,18 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <a href="{{url('/forgot-password')}}">Lấy lại mật khẩu?</a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="{{url('/dangki')}}">Đăng kí</a>
+                            </div>
+                        </div>
+
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                Đăng Kí
+                                    Đăng Nhập
                                 </button>
                             </div>
                         </div>
@@ -36,3 +45,7 @@
     </div>
 </div>
 @endsection
+
+@push('script')
+<link rel="stylesheet" href="{{ asset('/assets/css/register.css')}}">
+@endpush

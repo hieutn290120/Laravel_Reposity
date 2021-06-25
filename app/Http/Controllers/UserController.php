@@ -21,6 +21,8 @@ class UserController extends Controller
 
     public function create(Register $request)
     {
-        # code...
+        $user = User::all();
+        $user->update([$request->all()]);
+        return response()->json($user, 200);
     }
 }

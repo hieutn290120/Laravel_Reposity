@@ -48,3 +48,11 @@ body{
 .justify-content-center{
     margin: 0px auto;
 }
+
+form .error {
+    color: #ff0000;
+  }
+
+form .required{
+    color: #ff0000;
+}

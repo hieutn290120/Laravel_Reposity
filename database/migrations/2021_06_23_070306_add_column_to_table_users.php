@@ -16,11 +16,10 @@ class AddColumnToTableUsers extends Migration
         Schema::table('users', function (Blueprint $table) {
             //
             $table->string('phone')->nullable()->after('password');
-            $table->boolean('gender')->nullable()->after('phone');
-            $table->string('address')->nullable()->after('gender');
+            $table->integer('gender_id')->nullable()->after('phone')->unique();
+            $table->string('address')->nullable()->after('gender_id');
             $table->string('dob')->nullable()->after('address');
-            $table->boolean('roles')->nullable()->after('dob');
-
+            $table->integer('role_id')->nullable()->after('dob')->unique();
         });
     }
 
