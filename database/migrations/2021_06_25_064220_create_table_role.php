@@ -13,15 +13,19 @@ class CreateTableRole extends Migration
      */
     public function up()
     {
-        Schema::create('role', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->integer('role_id')->unique();
-            $table->string('role_name')->unique();
-            $table->foreign('role_id')
-            ->references('role_id')
-            ->on('users');
-            $table->timestamps();
-        });
+
+        if (!Schema::hasTable('role')) {
+            Schema::create('role', function (Blueprint $table) {
+                $table->bigIncrements('id');
+                $table->integer('role_id')->unique();
+                $table->string('role_name')->unique();
+                $table->foreign('role_id')
+                ->references('role_id')
+                ->on('users');
+                $table->timestamps();
+            });
+        }
+       
     }
 
     /**

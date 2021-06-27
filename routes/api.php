@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Controllers\LoginController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\UserController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,9 +16,12 @@ use App\Http\Controllers\UserController;
 |
 */
 
-Route::post('dangki', [UserController::class,'create'])->name('register.create');
 
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('/dangki', [RegisterController::class,'create'])->name('register.create');
+Route::post('dangnhap', [LoginController::class,'authenticate'])->name('login.authenticate');
+

@@ -13,6 +13,7 @@ class CreateTableGender extends Migration
      */
     public function up()
     {
+        if (!Schema::hasTable('gender')) {
         Schema::create('gender', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->integer('gender_id')->nullable()->unique();
@@ -22,6 +23,7 @@ class CreateTableGender extends Migration
             ->on('users');
             $table->timestamps();
         });
+    }
     }
 
     /**

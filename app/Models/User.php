@@ -24,10 +24,10 @@ class User extends Authenticatable
         'email',
         'password',
         'phone',
-        'gender',
+        'gender_id',
         'address',
         'dob',
-        'roles'
+        'role_id'
     ];
 
     
@@ -52,7 +52,7 @@ class User extends Authenticatable
         'dob' => 'date: Y-m-d',
     ];
 
-    protected $dateformat = "Y-m-d H:i:s.v";
+    // protected $dateformat = "Y-m-d H:i:s.v";
 
     /**
      * Get the user associated with the User

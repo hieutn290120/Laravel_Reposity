@@ -54,7 +54,7 @@
                                 <div class="form-group row">
                                     <label for="permanent_address" class="col-md-4 col-form-label text-md-right">Giới Tính <i class="required">(*)</i></label>
                                     <div class="col-md-6">
-                                       <select class="form-control" name="gender" id="gender">
+                                       <select class="form-control" name="gender_id" id="gender">
                                            <option value="0">Nam</option>
                                            <option value="1">Nữ</option>
                                            <option value="2">Khác</option>
@@ -87,6 +87,7 @@
     $(document).ready(function(){
         
         $("#dob").datepicker({
+            dateFormat: 'yy-mm-dd',
             changeMonth: true,
             changeYear: true
         });
@@ -141,19 +142,25 @@
         $('#form-register').submit( async function(){
 
            let object_API = await createUser();
-           let URL = '{{url('')}}/dangki';
-          
-            console.log(object_API);
-           
+           let URL = '{{url('')}}/api/dangki';
+
+        
+            // Create User
             if(object_API.create_user === 'create_user'){
-                // $.ajax({
-                //     url: URL,
-                //     type: "POST",
-                //     data: object_API.object_API,
-                //     success: function(res){
-                //         console.log(res);
-                //     }
-                // })
+                $.ajax({
+                    url: URL,
+                    type: "GET",
+                    data: object_API.object_API,
+                    success: function(res){
+                       if(res.status === 500 ){
+                            alert(res.description)
+                        };
+                    },
+                    error: function(err){
+                        console.log(err);
+                        //  alert('Đã xảy ra lỗi vui lòng thử lại');
+                    }
+                })
             }
         })
         
@@ -161,18 +168,23 @@
             return new Promise((resolve, reject) => {
                 let array = $('#form-register').serializeArray();
                 let object_API = {};
+                var flag = true;
+
                 array.forEach(x => {
                     object_API[x.name] = x.value;
+                    if(!x.value){
+                        flag = false;
+                    }
                 })
+
                 
-                if(array.length > 1 ){
+                if(flag){
                     resolve({object_API,'create_user':'create_user'})
                 }
+
                 reject({'status':404})
             })
         }
-
-
     })
        
 </script>
