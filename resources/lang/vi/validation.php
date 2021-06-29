@@ -28,6 +28,8 @@ return [
     ],
     'string' => ':attribute phải là kí tự chuỗi.',
     'unique' => ':attribute đã tồn tại.',
+    'email' => ':attribute phải là định dạng abc@...',
+
 
     /*
     |--------------------------------------------------------------------------

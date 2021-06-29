@@ -22,6 +22,7 @@ class RegisterController extends Controller
     public function __construct(UserRepositoryInterface $userRepository)
     {
         $this->userRepository = $userRepository;
+        
     }
 
 
@@ -30,7 +31,7 @@ class RegisterController extends Controller
         return view('page.account.register');
     }
 
-    public function create(Request $request)
+    public function create(Register $request)
     {
          $user =  $this->userRepository->create($request->all());
          return response()->json($user);

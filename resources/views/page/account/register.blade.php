@@ -95,7 +95,6 @@
         $("#form-register").validate(
             {
                 rules: {
-                    email: "required",
                     fullname: {
                         required: true,
                         minlength: 2
@@ -131,7 +130,10 @@
                         minlength: "Mật khẩu của tối thiểu 10 kí tự!",
                         equalTo: "Mật khẩu của bạn phải trùng nhau!"
                     },
-                    email: "Vui Lòng điền địa chỉ email!",
+                    email:{
+                        required: "Vui Lòng điền địa chỉ email!",
+                        email: "Email phải có định dạng abc@... "
+                    },
                     gender: "Vui Lòng chọn giới tính!",
                     dob: "Vui Lòng chọn ngày tháng năm sinh!",
                     address: "Vui Lòng nhập địa chỉ!"
@@ -152,13 +154,13 @@
                     type: "GET",
                     data: object_API.object_API,
                     success: function(res){
-                       if(res.status === 500 ){
-                            alert(res.description)
-                        };
+                    //    if(res.status === 500 ){
+                    //         alert(res.description)
+                    //     };
+                    console.log(res);
                     },
                     error: function(err){
-                        console.log(err);
-                        //  alert('Đã xảy ra lỗi vui lòng thử lại');
+                         $('#email-error').show().text(err.responseJSON.errors.email[0]);
                     }
                 })
             }

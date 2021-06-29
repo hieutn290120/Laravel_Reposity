@@ -5,17 +5,36 @@ use App\Models\User;
 use App\Repositories\Contracts\UserRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\DB;
+use Exception;
+use InvalidArgumentException;
 
 class UserRepository implements UserRepositoryInterface
 {
     public function authenticate(array $attributes){
         
+        DB::beginTransaction();
+        
+        // try{
+        //     if (Auth::attempt($attributes)) {
+                
+        //     }
+        // }catch(Exception $e){
+        //     DB::rollBack();
+        //     throw new  InvalidArgumentException(['status'=>500, 'description'=>'Login không thành công, kiểm tra tài khoản hoặc mật khẩu!']) ;
+        // }
+
+        // return ['status'=>200, 'description'=>'Login thành công!'];
 
         if (Auth::attempt($attributes)) {
-            // Authentication passed...
-            return ['status'=>200, 'description'=>'Login thành công!'];
+            // 
+        }else{
+            DB::rollBack();
+            throw new  InvalidArgumentException('Login không thành công, kiểm tra tài khoản hoặc mật khẩu!') ;
         }
-        return ['status'=>500, 'description'=>'Login không thành công, kiểm tra tài khoản hoặc mật khẩu!'];
+        DB::commit();
+
+        return ['status'=>200, 'description'=>'Login thành công!'];
     }
 
     public function getAll()
@@ -32,21 +51,29 @@ class UserRepository implements UserRepositoryInterface
     
     public function create(array $attributes)
     {
-       
+        DB::beginTransaction();
+        
+        $array =  $attributes;
+        $array['password'] = Hash::make($array['password']);
+        $array['role_id'] = 0;
+        // $user = User::all();
 
-        $data =  $attributes;
-        $data['password'] = Hash::make($data['password']);
-        $data['role_id'] = 0;
-        $user = User::all();
-
-        if(!empty($user[0])){
-            if($user[0]->email === $attributes['email']){
-                return ['status'=>500, 'description'=>'Email đã tồn tại, vui lòng chọn email khác!']
-              ;
-           };
+        try{
+           $account = User::create($array);
+        }catch(Exception  $e){
+            DB::rollBack();
+            throw new  InvalidArgumentException('Email đã tồn tại, vui lòng chọn email khác!') ;
         }
+        DB::commit();
+
+        // if(!empty($user[0])){
+        //     if($user[0]->email === $attributes['email']){
+        //         return ['status'=>500, 'description'=>'Email đã tồn tại, vui lòng chọn email khác!']
+        //       ;
+        //    };
+        // }
      
-        return ['status'=>200, 'description'=>User::create($data)];
+        return ['status'=>200, 'description'=>'Chúc mừng, đăng kí tài khoản thành công!'];
        
     }
 

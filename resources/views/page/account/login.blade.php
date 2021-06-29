@@ -86,6 +86,7 @@
                        if(res.status === 500 ){
                             alert(res.description)
                         };
+                        console.log(res);
                     },
                     error: function(err){
                         console.log(err);
