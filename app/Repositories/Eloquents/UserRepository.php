@@ -15,16 +15,6 @@ class UserRepository implements UserRepositoryInterface
         
         DB::beginTransaction();
         
-        // try{
-        //     if (Auth::attempt($attributes)) {
-                
-        //     }
-        // }catch(Exception $e){
-        //     DB::rollBack();
-        //     throw new  InvalidArgumentException(['status'=>500, 'description'=>'Login không thành công, kiểm tra tài khoản hoặc mật khẩu!']) ;
-        // }
-
-        // return ['status'=>200, 'description'=>'Login thành công!'];
 
         if (Auth::attempt($attributes)) {
             // 
@@ -65,13 +55,6 @@ class UserRepository implements UserRepositoryInterface
             throw new  InvalidArgumentException('Email đã tồn tại, vui lòng chọn email khác!') ;
         }
         DB::commit();
-
-        // if(!empty($user[0])){
-        //     if($user[0]->email === $attributes['email']){
-        //         return ['status'=>500, 'description'=>'Email đã tồn tại, vui lòng chọn email khác!']
-        //       ;
-        //    };
-        // }
      
         return ['status'=>200, 'description'=>'Chúc mừng, đăng kí tài khoản thành công!'];
        

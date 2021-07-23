@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\LoginController;
+use App\Http\Controllers\TestGuzzle;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -23,5 +24,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 Route::get('/dangki', [RegisterController::class,'create'])->name('register.create');
+Route::get('/test', [TestGuzzle::class,'getApiGuzzle'])->name('test.getApiGuzzle');
+
 Route::post('dangnhap', [LoginController::class,'authenticate'])->name('login.authenticate');
 

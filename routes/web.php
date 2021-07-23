@@ -6,6 +6,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\AccoutController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\CvController;
+
 
 
 /*
@@ -26,6 +28,7 @@ Route::get('/', function () {
 // Dang nhap && Dang Ki
 Route::get('dangki', [RegisterController::class,'index'])->name('register.index');
 Route::get('dangnhap', [LoginController::class,'index'])->name('register.index');
+Route::get('cv', [CvController::class,'index'])->name('cv.index');
 
 Auth::routes();
 
